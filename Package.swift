@@ -11,7 +11,7 @@ let package = Package(
         .package(url: "https://github.com/rayman-zhao/swift-cwinrt", branch: "main"),
         .package(url: "https://github.com/rayman-zhao/swift-windowsfoundation", branch: "main"),
         .package(url: "https://github.com/xhk1217/swift-uwp", branch: "main"),
-        .package(url: "https://github.com/rayman-zhao/swift-windowsappsdk", branch: "main"),
+        .package(url: "https://github.com/xhk1217/swift-windowsappsdk", branch: "main"),
     ],
     targets: [
         .target(
