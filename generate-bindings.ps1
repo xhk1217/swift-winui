@@ -126,6 +126,17 @@ function Invoke-SwiftWinRT() {
         exit 1
     }
 
+    # Post-generation patch for Swift syntax issues
+    $GeneratedFiles = Get-ChildItem -Path $OutputLocation -Filter *.swift -Recurse
+    foreach ($file in $GeneratedFiles) {
+        $content = Get-Content $file.FullName -Raw
+        $newContent = $content.Replace('[Any!]', '[Any?]').Replace('[WinUI.UIElement!]', '[WinUI.UIElement?]')
+        if ($newContent -ne $content) {
+            Write-Host "Patching $($file.Name)..." -ForegroundColor Yellow
+            $newContent | Set-Content $file.FullName -Encoding utf8
+        }
+    }
+
     $Projections.Projects | ForEach-Object {
         Copy-Project -OutputLocation $OutputLocation -ProjectName $_
     }
